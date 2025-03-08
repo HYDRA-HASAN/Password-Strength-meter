@@ -34,24 +34,24 @@ def generate_password(length=12):
     alphabet = string.ascii_letters + string.digits + "!@#$%^&*(),.?\":{}|<>"
     return ''.join(secrets.choice(alphabet) for _ in range(length))
 
-# Custom CSS for a visually stunning design
+# Custom CSS with black tab labels, cooler buttons, and eye button
 def add_custom_design():
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
     .stApp {
-        background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 100%);
+        background: linear-gradient(135deg, #FFFFFF 0%, #E6F0FA 100%);
         font-family: 'Poppins', sans-serif;
-        color: #FFFFFF;
+        color: #1A1A1A;
     }
     
     /* Main container */
     .main {
-        background: rgba(28, 28, 28, 0.95);
+        background: rgba(255, 255, 255, 0.95);
         border-radius: 20px;
         padding: 2.5rem;
-        box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 40px rgba(0, 149, 255, 0.1);
         max-width: 750px;
         margin: 3rem auto;
         backdrop-filter: blur(12px);
@@ -63,109 +63,135 @@ def add_custom_design():
         text-align: center;
         margin-bottom: 2.5rem;
         font-weight: 700;
-        background: linear-gradient(90deg, #03a9f4, #f441a5);
+        background: linear-gradient(90deg, #0095FF, #00DDEB);
         -webkit-background-clip: text;
         color: transparent;
-        text-shadow: 0 2px 10px rgba(244, 65, 165, 0.3);
+        text-shadow: 0 2px 10px rgba(0, 149, 255, 0.3);
         animation: fadeIn 1s ease-in-out;
     }
     
-    /* Input field with neon glow */
+    /* Make tab labels black */
+    .stTabs [role="tab"] {
+        color: #1A1A1A !important;
+        font-weight: 600;
+    }
+    .stTabs [role="tab"][aria-selected="true"] {
+        color: #0095FF !important;
+    }
+    
+    /* Input field with subtle glow */
     .stTextInput > div > div > input {
-        background: rgba(40, 40, 40, 0.9);
-        color: #FFFFFF;
-        border: 2px solid #333333;
+        background: rgba(245, 249, 255, 0.9);
+        color: #1A1A1A;
+        border: 2px solid #D6E6FF;
         border-radius: 12px;
         padding: 0.9rem;
         font-size: 1.2rem;
         transition: all 0.3s ease;
+        width: 85%; /* Leave space for eye button */
     }
     .stTextInput > div > div > input:focus {
-        border-color: #f441a5;
-        box-shadow: 0 0 15px rgba(244, 65, 165, 0.5);
+        border-color: #0095FF;
+        box-shadow: 0 0 15px rgba(0, 149, 255, 0.5);
     }
     
-    /* Uiverse.io Button Design (Modified for smaller size) */
-    .stButton > button {
-        font-size: 0.9em; /* Smaller font size */
-        padding: 0.4em 0.6em; /* Smaller padding */
-        border-radius: 0.5em;
-        border: none;
-        background-color: #000;
-        color: #fff;
-        cursor: pointer;
-        box-shadow: 2px 2px 3px #000000b4;
-        position: relative;
-        z-index: 1;
-        width: auto; /* Allow button to size based on content */
-        margin-top: 0.5rem;
-    }
-    .container {
-        position: relative;
-        padding: 3px;
-        background: linear-gradient(90deg, #03a9f4, #f441a5);
-        border-radius: 0.9em;
-        transition: all 0.4s ease;
-        display: inline-block; /* Ensure container fits button size */
-    }
-    .container::before {
-        content: "";
+    /* Eye button styling */
+    .eye-button {
         position: absolute;
-        inset: 0;
-        margin: auto;
-        border-radius: 0.9em;
-        z-index: -10;
-        filter: blur(0);
-        transition: filter 0.4s ease;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: #0095FF;
+        transition: color 0.3s ease;
     }
-    .container:hover::before {
-        background: linear-gradient(90deg, #03a9f4, #f441a5);
-        filter: blur(1.2em);
-    }
-    .container:active::before {
-        filter: blur(0.2em);
+    .eye-button:hover {
+        color: #00DDEB;
     }
     
-    /* Strength meter with neon effect */
+    /* Cooler Button Design with Pulsating Glow */
+    .stButton > button {
+        font-size: 1em;
+        padding: 0.7em 1.4em;
+        border-radius: 0.7em;
+        border: none;
+        background: linear-gradient(135deg, #0095FF, #00DDEB);
+        color: #FFFFFF;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 6px 20px rgba(0, 149, 255, 0.5);
+        animation: pulse 2s infinite;
+    }
+    .stButton > button::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(30deg);
+        transition: all 0.5s ease;
+        pointer-events: none;
+    }
+    .stButton > button:hover::before {
+        top: 100%;
+        left: 100%;
+    }
+    .stButton > button:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(0, 149, 255, 0.7);
+    }
+    .stButton > button:active {
+        transform: translateY(2px);
+        box-shadow: 0 4px 15px rgba(0, 149, 255, 0.4);
+    }
+    
+    /* Strength meter with light blue accents */
     .strength-meter {
-        background: rgba(40, 40, 40, 0.9);
+        background: rgba(245, 249, 255, 0.9);
         padding: 1.5rem;
         border-radius: 12px;
         margin-top: 2rem;
         display: flex;
         align-items: center;
         gap: 1.5rem;
-        box-shadow: 0 0 20px rgba(0, 255, 127, 0.2);
+        box-shadow: 0 0 20px rgba(0, 149, 255, 0.2);
         animation: slideIn 0.5s ease-out;
     }
     .strength-label {
         font-size: 1.3rem;
         font-weight: 600;
         min-width: 100px;
-        color: #FFFFFF;
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        color: #1A1A1A;
+        text-shadow: 0 0 5px rgba(0, 149, 255, 0.5);
     }
     .score-bar {
         flex-grow: 1;
         height: 14px;
-        background: #222222;
+        background: #D6E6FF;
         border-radius: 7px;
         overflow: hidden;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 0 5px rgba(0, 149, 255, 0.2);
     }
     .score-fill {
         height: 100%;
         transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 10px rgba(0, 149, 255, 0.3);
     }
     
-    /* Feedback box with gradient border */
+    /* Feedback box with light blue gradient border */
     .feedback-box {
-        background: rgba(28, 28, 28, 0.9);
+        background: rgba(245, 249, 255, 0.9);
         padding: 1.5rem;
         border-radius: 12px;
         margin-top: 2rem;
-        color: #FFFFFF;
+        color: #1A1A1A;
         font-size: 1rem;
         border: 2px solid transparent;
         background-clip: padding-box;
@@ -176,7 +202,7 @@ def add_custom_design():
         content: '';
         position: absolute;
         top: -2px; left: -2px; right: -2px; bottom: -2px;
-        background: linear-gradient(90deg, #03a9f4, #f441a5);
+        background: linear-gradient(90deg, #0095FF, #00DDEB);
         z-index: -1;
         border-radius: 14px;
     }
@@ -189,6 +215,11 @@ def add_custom_design():
     }
     
     /* Animations */
+    @keyframes pulse {
+        0% { box-shadow: 0 6px 20px rgba(0, 149, 255, 0.5); }
+        50% { box-shadow: 0 6px 20px rgba(0, 149, 255, 0.8); }
+        100% { box-shadow: 0 6px 20px rgba(0, 149, 255, 0.5); }
+    }
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
@@ -214,13 +245,22 @@ def main():
         # Tabs for Password Check and Generator
         tab1, tab2 = st.tabs(["Check Password", "Generate Password"])
         
-        # Tab 1: Password Checker
+        # Tab 1: Password Checker with Eye Button
         with tab1:
-            password = st.text_input("", placeholder="Enter your password", type="password", key="password_input")
-            # Wrap the button in a container div for the gradient effect
-            st.markdown('<div class="container">', unsafe_allow_html=True)
+            # Use a container to position the input and eye button
+            col1, col2 = st.columns([9, 1])
+            with col1:
+                if "show_password" not in st.session_state:
+                    st.session_state.show_password = False
+                password_type = "default" if st.session_state.show_password else "password"  # Changed "text" to "default"
+                password = st.text_input("", placeholder="Enter your password", type=password_type, key="password_input")
+            with col2:
+                eye_icon = "👁️" if not st.session_state.show_password else "👁️‍🗨️"
+                if st.button(eye_icon, key="toggle_password", help="Toggle password visibility"):
+                    st.session_state.show_password = not st.session_state.show_password
+                    st.rerun()  # Rerun to update the input type
+            
             analyze = st.button("Analyze", key="analyze_button")
-            st.markdown('</div>', unsafe_allow_html=True)
             
             if password:  # Real-time feedback
                 score, strength, feedback, bar_color = check_password_strength(password)
@@ -248,10 +288,7 @@ def main():
         # Tab 2: Password Generator
         with tab2:
             length = st.slider("Password Length", 8, 32, 12)
-            # Wrap the button in a container div for the gradient effect
-            st.markdown('<div class="container">', unsafe_allow_html=True)
             generate = st.button("Generate", key="generate_button")
-            st.markdown('</div>', unsafe_allow_html=True)
             
             if generate:
                 new_password = generate_password(length)
